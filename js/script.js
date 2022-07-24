@@ -2,8 +2,6 @@ const valores =[{id:0, duracion: "1 a 12 cuotas inclusive", intereses: "25% mas 
 let prestamo =prompt("Ingresa el importe para su credito");
 let cuotas =prompt("Ingrese la cuantidad de cuotas que desea abonarlo")
 
-let credito="prestamo";
-let duracion="cuotas";
 let int12 = 1.25;
 let int24 = 1.5;
 let int36 = 1.75;
@@ -13,6 +11,7 @@ let valorCta = 0;
 function calculo(a,b){
   return a*b;
 }
+
 
 function pagar(){
   if (cuotas<=12){
@@ -24,14 +23,25 @@ function pagar(){
     } else if(cuotas<=36){
     sFinal = calculo(prestamo,int36);
     return sFinal;
+    }else if(cuotas>36){
+       alert("Cantidad de cuotas superior a lo disponible")
+    }
  }
-}
-function debitar(a,b){
+
+ function debitar(a,b){
   return a/b;
 }
 
+alert("Usted termina abonando" + " $" + pagar() + " en " + cuotas + " cuotas de"+ " $" + debitar(sFinal,cuotas));
 
-alert("Usted termina abonando" + " $" + pagar() + " en " + cuotas + " cuotas de"+ " $" + debitar(sFinal,cuotas))
+let duracion = document.querySelector
+(".duracion");
+duracion.innerHTML = cuotas;
+let mensual =document.querySelector
+(".valorCta");
+mensual.innerHTML = sFinal/cuotas;
+
+
 
 for (const condicion of valores) {
   alert("Si adquiere un pestamo de "+condicion.duracion+ " termina abonando un "+condicion.intereses)
