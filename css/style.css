@@ -9,11 +9,19 @@ body{
     color: black;
 }
 h1{
+    font-size: 100px;
     text-align: center;
 }
 h2{
     text-align: center;
 }
 section{
+    font-size: 30px;
     text-align: center;
+}
+.btn{
+    text-align: center;
+}
+div{
+    margin-top: 10px;
 }

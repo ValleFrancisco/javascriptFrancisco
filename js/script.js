@@ -31,20 +31,37 @@ function pagar(){
  function debitar(a,b){
   return a/b;
 }
-
-alert("Usted termina abonando" + " $" + pagar() + " en " + cuotas + " cuotas de"+ " $" + debitar(sFinal,cuotas));
+/*
+alert("Usted termina abonando" + " $" + pagar() + " en " + cuotas + " cuotas de"+ " $" + debitar(sFinal,cuotas));*/
+pagar();
+debitar(sFinal,cuotas);
 
 let duracion = document.querySelector
 (".duracion");
 duracion.innerHTML = cuotas;
 let mensual =document.querySelector
 (".valorCta");
-mensual.innerHTML = sFinal/cuotas;
+mensual.innerHTML = debitar(sFinal,cuotas);
 
+const planes = document.querySelector
+(".detalle");
+planes.addEventListener("click",mostrar);
 
-
+function mostrar(){
 for (const condicion of valores) {
-  alert("Si adquiere un pestamo de "+condicion.duracion+ " termina abonando un "+condicion.intereses)
+  alert("Si adquiere un pestamo de "+condicion.duracion+ " termina abonando un "+condicion.intereses);
+}
+}
+
+const fecha = document.querySelector
+(".fecha");
+fecha.onclick =() =>{
+  alert("Las cuotas se cobran los dias 5 de cada mes sin importar feriados/fin de semana");
+}
+
+const termino = document.querySelector(".termino");
+termino.onclick = ()=>{
+  alert("En el caso que no se pueda realizar el cobro en la fecha pactada, se cobrara un 5% del valor de cuota en forma de penalizacion");
 }
 
 
