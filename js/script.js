@@ -10,11 +10,12 @@ let valorCta = 0;
 localStorage.setItem("cuotas","0");
 localStorage.setItem("prestamo","0");
 
-function guardarInfo(storage){
-  let cuotas = document.getElementById("#cuotas").value;
-  let prestamo = document.getElementById("#monto").value;
-}
-
+function guardarInfo(){
+  let cuotas = document.getElementById("cuotas").value;
+  let prestamo = document.getElementById("monto").value;
+  localStorage.setItem("cuotas",cuotas);
+  localStorage.setItem("prestamo",prestamo);
+  }
 
 
 pagar();
