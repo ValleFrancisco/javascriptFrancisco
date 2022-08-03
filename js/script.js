@@ -4,64 +4,58 @@ let cuotas =prompt("Ingrese la cuantidad de cuotas que desea abonarlo")*/
 let int12 = 1.25;
 let int24 = 1.5;
 let int36 = 1.75;
-let sFinal = 0;
-let valorCta = 0;
+var sFinal = 1000;
+var valorCta = 0;
 
-localStorage.setItem("cuotas","0");
-localStorage.setItem("prestamo","0");
+/*localStorage.setItem("cuotas","0");
+localStorage.setItem("prestamo","0");*/
 
-function guardarInfo(){
-  let cuotas = document.getElementById("cuotas").value;
-  let prestamo = document.getElementById("monto").value;
-  localStorage.setItem("cuotas",cuotas);
-  localStorage.setItem("prestamo",prestamo);
-  }
-
-
-pagar();
 debitar(sFinal, cuotas);
 function debitar(a, b) {
   return a / b;
 }
 
-function pagar() {
-  if (cuotas <= 12) {
-    sFinal = calculo(prestamo, int12);
-    return sFinal;
-  } else if (cuotas <= 24) {
-    sFinal = calculo(prestamo, int24);
-    return sFinal;
-  } else if (cuotas <= 36) {
-    sFinal = calculo(prestamo, int36);
-    return sFinal;
-  } else if (cuotas > 36) {
-    alert("Cantidad de cuotas superior a lo disponible")
-  }
-}
-
-function calculo(a,b) {
+function calculo(a, b) {
   return a * b;
 }
+document.querySelector(".btnSimular").addEventListener("click", () => {
+  function guardarInfo() {
+    let valorCta = document.getElementsByClassName("debito").value;
+    let cuotas = document.getElementById("cuotas").value;
+    let prestamo = document.getElementById("monto").value;
+    localStorage.setItem("cuotas", cuotas);
+    localStorage.setItem("prestamo", prestamo);
+    localStorage.setItem("valorCta",valorCta);
+  }
+  function pagar() {
+    if (cuotas <= 12) {
+      sFinal = calculo(prestamo, int12);
+      return sFinal;
+    } else if (cuotas <= 24) {
+      sFinal = calculo(prestamo, int24);
+      return sFinal;
+    } else if (cuotas <= 36) {
+      sFinal = calculo(prestamo, int36);
+      return sFinal;
+    } else if (cuotas > 36) {
+      alert("Cantidad de cuotas superior a lo disponible")
+    }
+  }
+  var debito = debitar(sFinal,cuotas);
+  
+  
 
-/*btnSimular.addEventListener("click", ()=>{
-const datosPrestamo = crearObjetoDatos();
-       if (check.checked){
-        guardarPrestamoenStorage(prestamo);
-       }
+  let duracion = document.querySelector
+    (".duracion");
+  duracion.innerHTML = this.cuotas.value;
+  let mensual = document.querySelector
+  (".debito");
+  mensual.innerHTML = debitar(sFinal, cuotas);
+  console.log(debitar(sFinal,cuotas));
+  console.log(sFinal);
+  console.log(cuotas);
+})
 
-})*/
-
-
-
-/*class Prestamo {
-     constructor(monto,duracion){
-        this.monto= parseFloat(monto);
-        this.duracion= parseInt(duracion);
-     } 
-}
-function crearObjetoPrestamo() {
-  return new Prestamo(monto.value, duracion.value,)
-}*/
 
 
 const fecha = document.querySelector(".fecha");
@@ -86,16 +80,6 @@ function mostrar() {
 
 
 
-/*
-alert("Usted termina abonando" + " $" + pagar() + " en " + cuotas + " cuotas de"+ " $" + debitar(sFinal,cuotas));*/
-
-
-let duracion = document.querySelector
-  (".duracion");
-duracion.innerHTML = cuotas;
-let mensual = document.querySelector
-  (".valorCta");
-mensual.innerHTML = debitar(sFinal, cuotas);
 
 
 
