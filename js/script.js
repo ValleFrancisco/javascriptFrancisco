@@ -4,7 +4,7 @@ let cuotas =prompt("Ingrese la cuantidad de cuotas que desea abonarlo")*/
 let int12 = 1.25;
 let int24 = 1.5;
 let int36 = 1.75;
-var sFinal = 1000;
+var sFinal = 0;
 var valorCta = 0;
 
 /*localStorage.setItem("cuotas","0");
@@ -27,33 +27,32 @@ document.querySelector(".btnSimular").addEventListener("click", () => {
     localStorage.setItem("prestamo", prestamo);
     localStorage.setItem("valorCta",valorCta);
   }
-  function pagar() {
+
+
+  function pagar(valorPrestamo) {
     if (cuotas <= 12) {
-      sFinal = calculo(prestamo, int12);
-      return sFinal;
+      sFinal = calculo(valorPrestamo, int12);
     } else if (cuotas <= 24) {
-      sFinal = calculo(prestamo, int24);
-      return sFinal;
+      sFinal = calculo(valorPrestamo, int24);
     } else if (cuotas <= 36) {
-      sFinal = calculo(prestamo, int36);
-      return sFinal;
+      sFinal = calculo(valorPrestamo, int36);
     } else if (cuotas > 36) {
       alert("Cantidad de cuotas superior a lo disponible")
     }
   }
-  var debito = debitar(sFinal,cuotas);
-  
-  
 
-  let duracion = document.querySelector
-    (".duracion");
-  duracion.innerHTML = this.cuotas.value;
-  let mensual = document.querySelector
-  (".debito");
+  let cuotas = document.getElementById("cuotas").value;
+  let prestamo = document.getElementById("monto").value;
+
+  pagar(prestamo);
+  
+  if (cuotas <=36){
+  let duracion = document.querySelector(".duracion");
+  duracion.innerHTML = cuotas;
+  let mensual = document.querySelector(".debito");
   mensual.innerHTML = debitar(sFinal, cuotas);
-  console.log(debitar(sFinal,cuotas));
-  console.log(sFinal);
-  console.log(cuotas);
+}
+  guardarInfo();
 })
 
 
