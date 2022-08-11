@@ -25,7 +25,7 @@ document.querySelector(".btnSimular").addEventListener("click", () => {
     let prestamo = document.getElementById("monto").value;
     localStorage.setItem("cuotas", cuotas);
     localStorage.setItem("prestamo", prestamo);
-    localStorage.setItem("valorCta",valorCta);
+    localStorage.setItem("valorCta", valorCta);
   }
 
 
@@ -37,7 +37,15 @@ document.querySelector(".btnSimular").addEventListener("click", () => {
     } else if (cuotas <= 36) {
       sFinal = calculo(valorPrestamo, int36);
     } else if (cuotas > 36) {
-      alert("Cantidad de cuotas superior a lo disponible")
+      Swal.fire({
+        title: "Cantidad de cuotas superior a lo disponible",
+        text: "Ingrese de 1 a 36 cuotas inclusive",
+        icon: "info",
+        iconColor: "#00ff00",
+        position: "top-center",
+        timer: 2000,
+        showConfirmButton: false
+      })
     }
   }
 
@@ -45,13 +53,13 @@ document.querySelector(".btnSimular").addEventListener("click", () => {
   let prestamo = document.getElementById("monto").value;
 
   pagar(prestamo);
-  
-  if (cuotas <=36){
-  let duracion = document.querySelector(".duracion");
-  duracion.innerHTML = cuotas;
-  let mensual = document.querySelector(".debito");
-  mensual.innerHTML = debitar(sFinal, cuotas);
-}
+
+  if (cuotas <= 36) {
+    let duracion = document.querySelector(".duracion");
+    duracion.innerHTML = cuotas;
+    let mensual = document.querySelector(".debito");
+    mensual.innerHTML = debitar(sFinal, cuotas);
+  }
   guardarInfo();
 })
 
@@ -59,27 +67,32 @@ document.querySelector(".btnSimular").addEventListener("click", () => {
 
 const fecha = document.querySelector(".fecha");
 fecha.onclick = () => {
-  alert("Las cuotas se cobran los dias 5 de cada mes sin importar feriados/fin de semana");
+  Swal.fire({
+    title: "Vencimiento",
+    text: "Las cuotas se cobran los dias 5 de cada mes sin importar feriados/fin de semana",
+    icon: "info",
+    iconColor: "0C188E",
+    confirmButtonText: "Gracias!"
+  })
 }
 
 const termino = document.querySelector(".termino");
 termino.onclick = () => {
-  alert("En el caso que no se pueda realizar el cobro en la fecha pactada, se cobrara un 5% del valor de cuota en forma de penalizacion");
-}
+  Swal.fire({
+    title: "Bases y condiciones",
+    text: "En el caso que no se pueda realizar el cobro en la fecha pactada, se cobrara un 5% del valor de cuota en forma de penalizacion",
+    icon: "error",
+    iconColor: "#ff0000",
+    position: "top-center",
+    confirmButtonText: "Entendido",
+})}
+
 const planes = document.querySelector
   (".detalle");
 planes.addEventListener("click", mostrar);
 
 function mostrar() {
-  for (const condicion of valores) {
-    alert("Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses);
+  for(const condicion of valores) {
+    Swal.fire("Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses)};
   }
-}
-
-
-
-
-
-
-
 
