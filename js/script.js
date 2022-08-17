@@ -85,14 +85,62 @@ termino.onclick = () => {
     iconColor: "#ff0000",
     position: "top-center",
     confirmButtonText: "Entendido",
-})}
+  })
+}
 
 const planes = document.querySelector
   (".detalle");
 planes.addEventListener("click", mostrar);
 
 function mostrar() {
-  for(const condicion of valores) {
-    Swal.fire("Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses)};
+  for (const condicion of valores) {
+    alert("Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses)
+  };
+}
+
+const btnBuscar = document.querySelector("#buscar");
+const selectDolar = document.querySelector("#dolar");
+const contenedor = document.querySelector("#contenedorValoresDolar");
+
+function filtrarDolar(array) {
+  let tipoDolar = selectDolar.value;
+  if (!tipoDolar) {
+    return array;
+  } else {
+    return array.filter((item) => item.nombre == tipoDolar);
   }
+}
+
+function crearHTML(array) {
+ contenedor.innerHTML = " ";
+  array.forEach((valoresDolar) => {
+    const precioDolar = `
+          <div class="col">
+              <div class="card h-100">
+                  <div class="card-body">
+                      <h3 class="card-title">${valoresDolar.nombre}</h5>
+                      <p class="card-text">Compra: ${valoresDolar.compra}</p>
+                      <p class="card-text">Venta: ${valoresDolar.venta}</p>
+                      <p class="card-text">Varacion: ${valoresDolar.variacion}</p>
+                      <p class="card-text">Numero de agencia: ${valoresDolar.agencia}</p>
+                  </div>
+              </div>
+          </div>`;
+    contenedor.innerHTML += precioDolar;
+  })
+}
+
+/*
+fetch("https://walo.in/dolar.php")
+  .then((base) => base.json())
+  .then((datos) => console.log(datos))*/
+
+btnBuscar.addEventListener('click', () => {
+  fetch("https://www.dolarsi.com/api/api.php?type=valoresprincipales")
+    .then((base) => base.json())
+    .then((data) => {
+      crearHTML(filtrarDolar(data));
+      console.log(data);
+    })
+})
 
