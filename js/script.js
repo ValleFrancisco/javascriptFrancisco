@@ -1,4 +1,6 @@
-const valores = [{ id: 0, duracion: "1 a 12 cuotas inclusive", intereses: "25% mas del valor prestado" }, { id: 1, duracion: "13 a 24 cuotas inclusive", intereses: "50% mas del valor prestado" }, { id: 2, duracion: "25 a 36 cuotas inclusive", intereses: "75% mas del valor prestado" }]
+const valores12 = { id:"0",duracion: "1 a 12 cuotas inclusive",intereses: "25% mas del valor prestado" };
+const valores24 = { id:"1",duracion: "13 a 24 cuotas inclusive",intereses: "50% mas del valor prestado" };
+const valores36 = { id:"2",duracion: "25 a 36 cuotas inclusive",intereses: "75% mas del valor prestado" };
 /*let prestamo =prompt("Ingresa el importe para su credito");
 let cuotas =prompt("Ingrese la cuantidad de cuotas que desea abonarlo")*/
 let int12 = 1.25;
@@ -92,11 +94,29 @@ const planes = document.querySelector
   (".detalle");
 planes.addEventListener("click", mostrar);
 
-function mostrar() {
-  for (const condicion of valores) {
-    alert("Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses)
+let cuotas12 = valores12.toString();
+let fechas = document.querySelector(".fechas");
+let fechas1 = document.querySelector(".fechas1");
+let fechas2 = document.querySelector(".fechas2");
+  function mostrar() {
+    fechas.innerHTML = "De "+ valores12.duracion + "terminas pagando un "+ valores12.intereses;
+    fechas1.innerHTML = "De "+ valores24.duracion + "terminas pagando un "+ valores24.intereses;
+    fechas2.innerHTML = "De "+ valores36.duracion + "terminas pagando un "+ valores36.intereses;
+    /*
+    for (const condicion of valores12) {
+      fechas.innerHTML = (condicion.id + "Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses);
+    };
+    for (const condicion of valores24) {
+      fechas.innerHTML = (condicion.id + "Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses);
+    };
+    for (const condicion of valores36) {
+      fechas.innerHTML = (condicion.id + "Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses);
+    };
+  }
+  /*for (const condicion of valores) {
+    alert("Si adquiere un pestamo de " + condicion.duracion + " termina abonando un " + condicion.intereses)*/
   };
-}
+
 
 const btnBuscar = document.querySelector("#buscar");
 const selectDolar = document.querySelector("#dolar");
@@ -105,24 +125,31 @@ const contenedor = document.querySelector("#contenedorValoresDolar");
 function filtrarDolar(array) {
   let tipoDolar = selectDolar.value;
   if (!tipoDolar) {
-    return array;
+    return Swal.fire({
+      title: "Dolar",
+      text: "Elige que tipo de dolar queres ver la cotizacion",
+      icon: "error",
+      iconColor: "#ff0000",
+      position: "top-center",
+      confirmButtonText: "Okey!",
+    });
   } else {
-    return array.filter((item) => item.nombre == tipoDolar);
+    return array.filter((item) => item.casa.nombre == tipoDolar);
   }
 }
 
 function crearHTML(array) {
- contenedor.innerHTML = " ";
+  contenedor.innerHTML = " ";
   array.forEach((valoresDolar) => {
     const precioDolar = `
-          <div class="col">
+          <div id="fondoDolar" class="col">
               <div class="card h-100">
                   <div class="card-body">
-                      <h3 class="card-title">${valoresDolar.nombre}</h5>
-                      <p class="card-text">Compra: ${valoresDolar.compra}</p>
-                      <p class="card-text">Venta: ${valoresDolar.venta}</p>
-                      <p class="card-text">Varacion: ${valoresDolar.variacion}</p>
-                      <p class="card-text">Numero de agencia: ${valoresDolar.agencia}</p>
+                      <h3 class="card-title">${valoresDolar.casa.nombre}</h5>
+                      <p class="card-text">Compra: ${valoresDolar.casa.compra}</p>
+                      <p class="card-text">Venta: ${valoresDolar.casa.venta}</p>
+                      <p class="card-text">Varacion: ${valoresDolar.casa.variacion}</p>
+                      <p class="card-text">Numero de agencia: ${valoresDolar.casa.agencia}</p>
                   </div>
               </div>
           </div>`;
